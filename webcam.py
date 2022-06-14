@@ -13,7 +13,7 @@ while True:
 
     faces = faceCascade.detectMultiScale(
         gray,
-        scaleFactor=1.11,
+        scaleFactor=1.1,
         minNeighbors=5,               
         minSize=(10, 10),
         flags=cv2.CASCADE_SCALE_IMAGE
@@ -21,7 +21,7 @@ while True:
 
     #print(type(faces))
 
-    #print(faces)
+    print(faces)
     for (x, y, w, h) in faces:
         print('working')
         filename = 'faces/ddd.jpg'
