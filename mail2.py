@@ -23,5 +23,6 @@ with smtplib.SMTP('smtp.gmail.com',587) as smtp:
  smtp.ehlo()
 
  smtp.login("mysmart99mail@gmail.com","cjtbiwpobyyqvcpi")
-
+#image added
+#sfv
  smtp.send_message(msg)
