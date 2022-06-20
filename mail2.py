@@ -10,7 +10,7 @@ msg['From']='mysmart99mail@gmail.com'
 msg['To']='mysmart99mail@gmail.com'
 msg.set_content('An unknown face has been recognized at your doorlock!Image attached!!')
 
-with open('C:\\Users\\HP\\Documents\\GitHub\\face-detection\\paris.jpg','rb') as f:
+with open('C:\\Users\\HP\\Documents\\smart\\faces\\ddd.jpg','rb') as f:
  file_data=f.read()
  file_type=imghdr.what(f.name)
  file_name=f.name
