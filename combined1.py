@@ -5,16 +5,18 @@ import smtplib
 import imghdr
 import threading
 from email.message import EmailMessage
+import os
 
 flag=0
 count=0
+frame=0
 def web_cam():
-    global flag,count
+    global flag,count,frame
     cascPath = "C:\\Users\\hemal\\Documents\\GitHub\\face-detection\\haarcascade_frontalface_default.xml"
     faceCascade = cv2.CascadeClassifier(cascPath)
 
     video_capture = cv2.VideoCapture(0)
-    
+    f=0
     while True:
         ret, frame = video_capture.read()
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
@@ -30,19 +32,20 @@ def web_cam():
         )
             
         for (x, y, w, h) in faces:
-            
+            f=1
             filename = 'faces/ddd.jpg'
             cv2.imwrite(filename, frame)
             cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 255, 0), 2)
             count=count+1
 
-        if flag==0:    
+        if flag==0 and f==1:    
             flag=1
             t1 = threading.Thread(target=verify, args=())
             t1.start()
             #verify()
             #t1.join()
 
+        f=0
         cv2.imshow('Video', frame)
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
@@ -50,20 +53,51 @@ def web_cam():
     cv2.destroyAllWindows()
 
 def verify():
-    global flag,count
+    global flag,count,frame
     models = ["VGG-Face", "Facenet", "Facenet512", "OpenFace", "DeepFace", "DeepID", "ArcFace", "Dlib", "SFace"]
     detectors = ["opencv", "ssd", "mtcnn", "dlib", "retinaface"]
     metrics = ["cosine", "euclidean", "euclidean_l2"]
-    verification=DeepFace.verify(
-    img1_path="faces\\ddd.jpg",
-    img2_path="faces\\MEH.jpg",
-    model_name = models[1], distance_metric = metrics[2],
-    detector_backend = detectors[0],
-    enforce_detection=False)
-    #print("\t\t",verification)
+    
+    for file in os.listdir("stranger"):
+        print("\t",file)
+        verification=DeepFace.verify(
+        img1_path="faces\\ddd.jpg",
+        img2_path="stranger\\"+file,
+        model_name = models[-2], distance_metric = metrics[-2],
+        detector_backend = detectors[0],
+        enforce_detection=False)
+        if verification.get('verified')==True:
+            print("%%%%%%%%%%%%%%%%% Stranger again no email sent %%%%%%%%%%%%%%%%")
+            print(count)
+            flag=0
+            count=0
+            return
+    try:
+        for file in os.listdir("owners"):
+            print("\t",file)
+            verification=DeepFace.verify(
+            img1_path="faces\\ddd.jpg",
+            img2_path="owners\\"+file,
+            model_name = models[-2], distance_metric = metrics[-2],
+            detector_backend = detectors[0],
+            enforce_detection=False)
+
+            if verification.get('verified')==True:
+                print("%%%%%%%%%%%%%%%%% Access Granted %%%%%%%%%%%%%%%%")
+                filename = 'owners/001.jpg'
+                cv2.imwrite(filename, frame)
+                break
+    except:
+        print("%%%%%%%%%%%%%%%%%% No face deteacted %%%%%%%%%%%%%%%")
+    
+    
     print("\t\t",verification.get('verified'))
     if verification.get('verified')==False:
         print('mail sending')
+        '''t2 = threading.Thread(target=email_send, args=())
+        t2.start()'''
+        filename = 'stranger/star.jpg'
+        cv2.imwrite(filename, frame)
         email_send()
     print(count)
     flag=0
