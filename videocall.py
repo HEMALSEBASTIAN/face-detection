@@ -45,7 +45,16 @@ def Glogin(mail_address, password):
     driver.implicitly_wait(7)
 
 
-    
+    start_button=driver.find_element("xpath",'//*[@id="yDmH0d"]/c-wiz/div/div[2]/div/div[1]/div[3]/div/div[1]/div[1]/div/button/span')
+    start_button.click()
+
+
+    call_button=driver.find_element("xpath",'//*[@id="yDmH0d"]/c-wiz/div/div[2]/div/div[1]/div[3]/div/div[1]/div[2]/div/ul/li[2]/span[3]')
+    call_button.click()
+
+    link_button=driver.find_element("xpath",'//*[@id="ow3"]/div[3]/div[2]/div[3]/div[1]/div[1]')
+    print(link_button.text)
+    LINK=link_button.text
 
 
 
@@ -77,5 +86,5 @@ driver=webdriver.Chrome(
 # login to Google account
 Glogin(mail_address, password)
 
-# go to google meet
+
 
