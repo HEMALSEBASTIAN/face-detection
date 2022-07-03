@@ -21,14 +21,16 @@ def web_cam():
     down=0
     while True:
         ret, frame = video_capture.read()
+
+        #converting image to grayscale
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
         #to detect faces in each frame
         faces = faceCascade.detectMultiScale( 
             gray,
-            scaleFactor=1.1,
-            minNeighbors=5,               
-            minSize=(90, 90),
+            scaleFactor=1.1,    #for resizing the image
+            minNeighbors=5,     # Higher value results in fewer detections but with higher quality                
+            minSize=(250, 250), #minimum size if the face to be detected
             flags=cv2.CASCADE_SCALE_IMAGE
         )
 
@@ -106,8 +108,10 @@ def verify():
     
     
     
-    
+    #sending email
     print('mail sending')
+    
+    #storing image of stranger
     filename1 = 'stranger/star.jpg'
     cv2.imwrite(filename1, frame)
     email_send()

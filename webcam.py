@@ -9,24 +9,23 @@ video_capture = cv2.VideoCapture(0)
 while True:
     ret, frame = video_capture.read()
 
+    #converting image to grayscale
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
     faces = faceCascade.detectMultiScale(
         gray,
-        scaleFactor=1.1,
-        minNeighbors=5,               
-        minSize=(10, 10),
+        scaleFactor=1.1,    #for resizing the image
+        minNeighbors=5,     # Higher value results in fewer detections but with higher quality              
+        minSize=(256, 250), #minimum size if the face to be detected
         flags=cv2.CASCADE_SCALE_IMAGE
     )
 
-    #print(type(faces))
-
-    #print(faces)
+    
     for (x, y, w, h) in faces:
         print('working')
         filename = 'faces/ddd.jpg'
-        cv2.imwrite(filename, frame)
-        cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 255, 0), 2)
+        cv2.imwrite(filename, frame)                                #saving captured image
+        cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 255, 0), 2)    #drawing rectangular box around images
     print('stop')
     
     
