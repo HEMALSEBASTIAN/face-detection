@@ -1,4 +1,5 @@
 # import required modules
+from attr import s
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
@@ -8,29 +9,44 @@ import time
 
 
 def Glogin(mail_address, password):
-	# Login Page
-	driver.get(
-		'https://accounts.google.com/ServiceLogin?hl=en&passive=true&continue=https://www.google.com/&ec=GAZAAQ/')
+    # Login Page
+    driver.get(
+        'https://apps.google.com/meet/?hs=197')
+
+    #click sign in button
+    s=driver.find_element("xpath",'//*[@id="drawer"]/div/div[3]/div[1]/div/span[1]/a')
+    s.click()
+
+    #adding a wait so that next page load
+    driver.implicitly_wait(2)
+
+    # input Gmail
+    #input username
+    username=driver.find_element("xpath",'//*[@id="identifierId"]')
+    username.click()
+    username.send_keys(mail_address)
+
+    #click next
+    next1=driver.find_element("xpath",'//*[@id="identifierNext"]')
+    next1.click()
+
+    #adding a wait so that next page load
+    driver.implicitly_wait(2)
+    # input Password
+    pswd=driver.find_element("xpath",'//*[@id="password"]/div[1]/div/div[1]/input')
+    pswd.click()
+    pswd.send_keys(password)
+
+    #click next
+    next2=driver.find_element("xpath",'//*[@id="passwordNext"]')
+    next2.click()
+
+    #adding a wait so that next page load
+    driver.implicitly_wait(7)
 
 
+    
 
-	# input Gmail
-	#input username
-	username=driver.find_element("xpath",'//*[@id="identifierId"]')
-	username.click()
-	username.send_keys(mail_address)
-
-	#click next
-	next=driver.find_element("xpath",'//*[@id="identifierNext"]')
-	next.click()
-
-	#adding a wait so that next page load
-	driver.implicitly_wait(2)
-	# input Password
-	pswd=driver.find_element("xpath",'//*[@id="password"]/div[1]/div/div[1]/input')
-	print("2")
-	pswd.click()
-	pswd.send_keys(password)
 
 
 
@@ -60,4 +76,6 @@ driver=webdriver.Chrome(
 
 # login to Google account
 Glogin(mail_address, password)
+
+# go to google meet
 
