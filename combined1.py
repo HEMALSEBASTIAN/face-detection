@@ -17,6 +17,7 @@ def web_cam():
 
     video_capture = cv2.VideoCapture(0)
     f=0
+    down=0
     while True:
         ret, frame = video_capture.read()
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
@@ -27,7 +28,7 @@ def web_cam():
             gray,
             scaleFactor=1.1,
             minNeighbors=5,               
-            minSize=(30, 30),
+            minSize=(90, 90),
             flags=cv2.CASCADE_SCALE_IMAGE
         )
             
@@ -38,13 +39,15 @@ def web_cam():
             cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 255, 0), 2)
             count=count+1
 
-        if flag==0 and f==1:    
+        if flag==0 and f==1 and down>100:    
             flag=1
             t1 = threading.Thread(target=verify, args=())
+            down=0
             t1.start()
             #verify()
             #t1.join()
 
+        down=down+1
         f=0
         cv2.imshow('Video', frame)
         if cv2.waitKey(1) & 0xFF == ord('q'):
@@ -58,8 +61,9 @@ def verify():
     detectors = ["opencv", "ssd", "mtcnn", "dlib", "retinaface"]
     metrics = ["cosine", "euclidean", "euclidean_l2"]
     
+
     for file in os.listdir("stranger"):
-        print("\t",file)
+        print("\tStranger : ",file)
         verification=DeepFace.verify(
         img1_path="faces\\ddd.jpg",
         img2_path="stranger\\"+file,
@@ -74,7 +78,7 @@ def verify():
             return
     try:
         for file in os.listdir("owners"):
-            print("\t",file)
+            print("\tOwners : ",file)
             verification=DeepFace.verify(
             img1_path="faces\\ddd.jpg",
             img2_path="owners\\"+file,
@@ -94,8 +98,6 @@ def verify():
     print("\t\t",verification.get('verified'))
     if verification.get('verified')==False:
         print('mail sending')
-        '''t2 = threading.Thread(target=email_send, args=())
-        t2.start()'''
         filename = 'stranger/star.jpg'
         cv2.imwrite(filename, frame)
         email_send()
