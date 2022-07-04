@@ -13,7 +13,7 @@ count=0
 frame=0
 def web_cam():
     global flag,count,frame
-    cascPath = "C:\\Users\\hemal\\Documents\\GitHub\\face-detection\\haarcascade_frontalface_default.xml"
+    cascPath = "haarcascade_frontalface_default.xml"
     faceCascade = cv2.CascadeClassifier(cascPath)
 
     video_capture = cv2.VideoCapture(0)
