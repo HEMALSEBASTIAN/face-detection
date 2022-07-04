@@ -8,7 +8,7 @@ msg=EmailMessage()
 msg['Subject']='Home Security'
 msg['From']='mysmart99mail@gmail.com'
 msg['To']='mysmart99mail@gmail.com'
-msg.set_content('An unknown face has been recognized at your doorlock! Image attached!!')
+msg.set_content('An unknown face has been recognized at your doorlock! The image has been atteched!!!')
 
 with open('C:\\Users\\hemal\\Desktop\\Webcam-Face-Detect-master\\faces\\ddd.jpg','rb') as f:
     file_data=f.read()
