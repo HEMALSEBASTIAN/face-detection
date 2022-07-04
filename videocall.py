@@ -81,7 +81,7 @@ opt.add_experimental_option("prefs", {
 #Gives path to chrome webdriver and loads classroom webpage
 driver=webdriver.Chrome(
 	options=opt, 
-	executable_path='C:\\Users\\hemal\\Downloads\\chromedriver_win32\\chromedriver.exe')
+	executable_path='chromedriver.exe')
 
 # login to Google account
 Glogin(mail_address, password)
