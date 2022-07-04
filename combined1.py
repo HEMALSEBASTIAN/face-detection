@@ -16,7 +16,7 @@ def web_cam():
     cascPath = "C:\\Users\\hemal\\Documents\\GitHub\\face-detection\\haarcascade_frontalface_default.xml"
     faceCascade = cv2.CascadeClassifier(cascPath)
 
-    video_capture = cv2.VideoCapture(1)
+    video_capture = cv2.VideoCapture(0)
     f=0
     down=0
     while True:
