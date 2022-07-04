@@ -6,52 +6,61 @@ import os
 import sys
 from deepface import DeepFace
 from email.message import EmailMessage
+from PIL import Image
 
 
 flag=0
 count=0
 frame=0
+name=['']
 def web_cam():
-    global flag,count,frame
+    global flag,count,frame,name
     cascPath = "haarcascade_frontalface_default.xml"
     faceCascade = cv2.CascadeClassifier(cascPath)
 
     video_capture = cv2.VideoCapture(0)
-    f=0
+    no_face=0  
     down=0
+    x=0
+    y=0
     while True:
         ret, frame = video_capture.read()
-
-        #converting image to grayscale
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
         #to detect faces in each frame
         faces = faceCascade.detectMultiScale( 
             gray,
-            scaleFactor=1.1,    #for resizing the image
-            minNeighbors=5,     # Higher value results in fewer detections but with higher quality                
-            minSize=(200, 200), #minimum size if the face to be detected
+            scaleFactor=1.1,
+            minNeighbors=5,               
+            minSize=(200, 200),
             flags=cv2.CASCADE_SCALE_IMAGE
         )
 
-        #to save image and draw rectangle when face is detected    
+        #to save image and draw rectangle when face is detected 
+         
         for (x, y, w, h) in faces:
-            f=1
             filename = 'faces/ddd.jpg'
+            no_face=1
             cv2.imwrite(filename, frame)
             cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 255, 0), 2)
+        
             count=count+1
+            down=down+1
 
+        if no_face==0:
+            name[0]=''
+
+        cv2.putText(frame,name[0],(x,y-10),cv2.FONT_HERSHEY_SIMPLEX, 0.8,(0, 255, 0), 1)
         #to call verify function
         #call verify function only when the previous thread has finish execution
-        if flag==0 and f==1 and down>200:    
+        if flag==0 and no_face==1 and down>100:    
             flag=1
             t1 = threading.Thread(target=verify, args=())
             down=0
             t1.start()
 
-        down=down+1
-        f=0
+        #down=down+1
+        no_face=0
         cv2.imshow('Video', frame)
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
@@ -61,7 +70,7 @@ def web_cam():
 
 #function to perform face verification
 def verify():
-    global flag,count,frame
+    global flag,count,frame,name
     models = ["VGG-Face", "Facenet", "Facenet512", "OpenFace", "DeepFace", "DeepID", "ArcFace", "Dlib", "SFace"]
     detectors = ["opencv", "ssd", "mtcnn", "dlib", "retinaface"]
     metrics = ["cosine", "euclidean", "euclidean_l2"]
@@ -75,13 +84,17 @@ def verify():
             img1_path="faces\\ddd.jpg",
             img2_path="owners\\"+file,
             model_name = models[2], distance_metric = metrics[1],
-            detector_backend = detectors[0],
+            detector_backend = detectors[1],
             enforce_detection=False)
 
             if verification.get('verified')==True:
+                name=file.split('.')
+                nn=name[0]
+                name[0]=nn[1:]
                 print("%%%%%%%%%%%%%%%%% Access Granted %%%%%%%%%%%%%%%%")
-                filename = 'owners/001.jpg'
-                cv2.imwrite(filename, frame)
+                current_owner=cv2.imread('owners/'+file)
+                filename = 'owners/'+'1'+file[1:]
+                cv2.imwrite(filename, current_owner)
                 flag=0
                 count=0
                 return
@@ -100,6 +113,7 @@ def verify():
         detector_backend = detectors[0],
         enforce_detection=False)
         if verification.get('verified')==True:
+            name[0]='Stranger'
             print("%%%%%%%%%%%%%%%%% Stranger again no email sent %%%%%%%%%%%%%%%%")
             print(count)
             flag=0
@@ -108,11 +122,10 @@ def verify():
     
     
     
-    #sending email
-    print('mail sending')
     
-    #storing image of stranger
+    print('mail sending')
     filename1 = 'stranger/star.jpg'
+    name[0]='Stranger'
     cv2.imwrite(filename1, frame)
     email_send()
     print(count)
