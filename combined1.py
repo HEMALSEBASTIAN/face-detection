@@ -148,5 +148,5 @@ def email_send():
     print("mail sent")
 
 
-#JJJJJJJ
+
 web_cam()
