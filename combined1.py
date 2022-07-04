@@ -30,7 +30,7 @@ def web_cam():
             gray,
             scaleFactor=1.1,    #for resizing the image
             minNeighbors=5,     # Higher value results in fewer detections but with higher quality                
-            minSize=(250, 250), #minimum size if the face to be detected
+            minSize=(200, 200), #minimum size if the face to be detected
             flags=cv2.CASCADE_SCALE_IMAGE
         )
 
