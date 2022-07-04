@@ -1,0 +1,14 @@
+#Create Message Box in Python GUI Application  
+import cv2
+import numpy as np
+import matplotlib.pyplot as plt
+
+%matplotlib inline
+def generate_empty_image():
+
+    return np.ones(shape=(512,512,3), dtype=np.int16)
+img = generate_empty_image()
+
+cv2.putText(img=img, text='Acess granted', org=(150, 250), fontFace=cv2.FONT_HERSHEY_TRIPLEX, fontScale=3, color=(0, 255, 0),thickness=3)
+
+plt.imshow(img)
