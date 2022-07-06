@@ -7,7 +7,7 @@ import sys
 from deepface import DeepFace
 from email.message import EmailMessage
 from PIL import Image
-
+from twilio.rest import Client 
 
 flag=0
 count=0
@@ -127,7 +127,11 @@ def verify():
     filename1 = 'stranger/star.jpg'
     name[0]='Stranger'
     cv2.imwrite(filename1, frame)
-    email_send()
+    t2 = threading.Thread(target=email_send, args=())
+    t3 = threading.Thread(target=sms_send, args=())
+    t2.start()
+    t3.start()
+    #email_send()
     print(count)
     flag=0
     count=0
@@ -142,7 +146,7 @@ def email_send():
     msg['To']='hemalsebastian123@gmail.com'
     msg.set_content('An unknown face has been recognized at your doorlock!Image attached!!')
     
-    with open('C:\\Users\\hemal\\Desktop\\Webcam-Face-Detect-master\\faces\\ddd.jpg','rb') as f:
+    with open('stranger\\star.jpg','rb') as f:
         file_data=f.read()
         file_type=imghdr.what(f.name)
         file_name=f.name
@@ -161,5 +165,17 @@ def email_send():
     print("mail sent")
 
 
+def sms_send():
+    account_sid = 'AC113e8a5153f1be30f820fe39994e56e1' 
+    auth_token = '0673d0b62b5fd5f2c1870cccb822b4e7' 
+    client = Client(account_sid, auth_token) 
+    
+    message = client.messages.create(  
+                                messaging_service_sid='MGe7936fcc99775f919ae5dd2282a5bfb7', 
+                                body='ALERT',      
+                                to='+919497297856 ' 
+                            ) 
+    
+    print(message.sid)
 
 web_cam()
