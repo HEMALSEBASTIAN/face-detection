@@ -44,7 +44,8 @@ class Ui_MainWindow(object):
 
                 if k%256 == 32:
                   self.tname=self.namebutton.text()
-                  img_name = 'C:/Users/HP/Desktop/'+self.tname + '.png'
+                  img_name = self.tname + '.png'
+                  #'C:/Users/HP/Desktop/'+
                   print(img_name)
                   cv2.imwrite(img_name,frame)
                   print("Picture taken")
