@@ -24,7 +24,7 @@ img_name="d"
 
 class Ui_MainWindow(object):
     def capture(self):
-            print("clicked")
+            print("Clicking Image!!")
             cam=cv2.VideoCapture(0)
             #cv2.namedWindow("Python Webcam")
             img_counter=0
