@@ -23,8 +23,6 @@ name="name"
 img_name="d"
 
 class Ui_MainWindow(object):
-    
-    
     def capture(self):
             print("clicked")
             cam=cv2.VideoCapture(0)
@@ -45,8 +43,8 @@ class Ui_MainWindow(object):
                   #break
 
                 if k%256 == 32:
-                  self.tname=self.namefield.text()
-                  img_name = self.tname + '.png'
+                  self.tname=self.namebutton.text()
+                  img_name = 'C:/Users/HP/Desktop/'+self.tname + '.png'
                   print(img_name)
                   cv2.imwrite(img_name,frame)
                   print("Picture taken")
@@ -60,21 +58,19 @@ class Ui_MainWindow(object):
 
             cv2.destroyWindow("test")
 
-    def retake(self):
+    def retakepic(self):
             self.capture()
-    def save(self):
+    def savepic(self):
         #cv2.destroyWindow("opencv_frame_0.png")
-        print("Saved")
-        cv2.destroyAllWindows()
-        quit()
+                print("Saved")
+                cv2.destroyAllWindows()
+                quit()
     #    name=self.namefield.text()
      #   name2=".png"
       #  name3= " ".join([name,name2])
         #cv2.imwrite(name3,name3)
        # os. rename(img_name,name3) 
-    
-
-class Ui_MainWindow(object):
+        
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(1008, 691)
@@ -99,7 +95,7 @@ class Ui_MainWindow(object):
         self.label_2 = QtWidgets.QLabel(self.centralwidget)
         self.label_2.setGeometry(QtCore.QRect(370, 20, 91, 91))
         self.label_2.setText("")
-        self.label_2.setPixmap(QtGui.QPixmap("add.png"))
+        self.label_2.setPixmap(QtGui.QPixmap("../../Downloads/add-removebg-preview.png"))
         self.label_2.setScaledContents(True)
         self.label_2.setObjectName("label_2")
         self.namebutton = QtWidgets.QLineEdit(self.centralwidget)
@@ -131,6 +127,7 @@ class Ui_MainWindow(object):
         self.captureimagebutton.setObjectName("captureimagebutton")
         self.captureimagebutton.clicked.connect(self.capture)
 
+        
         self.retake = QtWidgets.QPushButton(self.centralwidget)
         self.retake.setGeometry(QtCore.QRect(430, 360, 211, 51))
         font = QtGui.QFont()
@@ -142,7 +139,7 @@ class Ui_MainWindow(object):
         self.retake.setStyleSheet("background-color: qlineargradient(spread:reflect, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(255, 255, 255, 255), stop:0.895522 rgba(32, 99, 119, 255));\n"
 "")
         self.retake.setObjectName("retake")
-        self.retake.clicked.connect(self.retake)
+        self.retake.clicked.connect(self.retakepic)
 
         self.save = QtWidgets.QPushButton(self.centralwidget)
         self.save.setGeometry(QtCore.QRect(440, 460, 191, 71))
@@ -155,24 +152,22 @@ class Ui_MainWindow(object):
         self.save.setStyleSheet("background-color: qlineargradient(spread:reflect, x1:0, y1:0, x2:1, y2:0, stop:0.179104 rgba(43, 69, 96, 255), stop:0.890547 rgba(107, 116, 119, 255));\n"
 "color: rgb(0, 0, 0);\n"
 "")
-        
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("save.ico"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap("../../Downloads/images/save.ico"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.save.setIcon(icon)
         self.save.setIconSize(QtCore.QSize(60, 60))
         self.save.setObjectName("save")
-        self.savebutton.clicked.connect(self.save)
-        
+        self.save.clicked.connect(self.savepic)
         self.image1 = QtWidgets.QLabel(self.centralwidget)
         self.image1.setGeometry(QtCore.QRect(70, 150, 241, 241))
         self.image1.setText("")
-        self.image1.setPixmap(QtGui.QPixmap("images1-removebg-preview.png"))
+        self.image1.setPixmap(QtGui.QPixmap("../../Downloads/images1-removebg-preview.png"))
         self.image1.setScaledContents(True)
         self.image1.setObjectName("image1")
         self.image2 = QtWidgets.QLabel(self.centralwidget)
         self.image2.setGeometry(QtCore.QRect(750, 160, 251, 231))
         self.image2.setText("")
-        self.image2.setPixmap(QtGui.QPixmap("images-removebg-preview.png"))
+        self.image2.setPixmap(QtGui.QPixmap("../../Downloads/images-removebg-preview.png"))
         self.image2.setScaledContents(True)
         self.image2.setObjectName("image2")
         MainWindow.setCentralWidget(self.centralwidget)
