@@ -10,9 +10,10 @@ import time
 
 def Glogin(mail_address, password):
     # Login Page
-    driver.get(
-        'https://apps.google.com/meet/?hs=197')
 
+    driver.get(
+    'https://apps.google.com/meet/?hs=197')
+    driver.implicitly_wait(15)
     #click sign in button
     s=driver.find_element("xpath",'//*[@id="drawer"]/div/div[3]/div[1]/div/span[1]/a')
     s.click()
@@ -59,13 +60,14 @@ def Glogin(mail_address, password):
 
 
 
-
 # assign email id and password
 mail_address = 'u1903092@rajagiri.edu.in'
 password = 'iamaHEROMAN@27!'
 
 # create chrome instance
-opt = Options()
+#opt = Options()
+opt=webdriver.ChromeOptions()
+opt.add_experimental_option('excludeSwitches', ['enable-logging'])
 opt.add_argument('--disable-blink-features=AutomationControlled')
 opt.add_argument('--start-maximized') #chrome browser will always open in full screen
 opt.add_argument('--disable-extensions') #disable all chrome extension
