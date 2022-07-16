@@ -231,9 +231,9 @@ class Ui_Dialog(object):
 
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
-        Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
+        Dialog.setWindowTitle(_translate("SMART CAMERA", "Dialog"))
         self.label.setText(_translate("Dialog", "WELCOME !"))
-        self.radioButton_2.setText(_translate("Dialog", "PushButton"))
+        self.radioButton_2.setText(_translate("Dialog", " "))
         self.pushButton.setText(_translate("Dialog", "ADD NEW USER"))
         self.pushButton_2.setText(_translate("Dialog", "CAPTURE IMAGE"))
 
