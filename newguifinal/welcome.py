@@ -22,6 +22,7 @@ class Ui_MainWindow(object):
         self.window.show()
     def addfunct(self): 
         print("Add new member button clicked")   
+
     def capturefunct(self):
         print("Capture button clicked")
     def setupUi(self, Dialog):
@@ -235,6 +236,7 @@ class Ui_MainWindow(object):
 "border-color: rgb(137, 52, 255);")
         self.addnewbutton.setObjectName("addnewbutton")
         self.addnewbutton.clicked.connect(self.addfunct)
+        
 
         self.captbutton = QtWidgets.QPushButton(Dialog)
         self.captbutton.setGeometry(QtCore.QRect(370, 300, 171, 41))
