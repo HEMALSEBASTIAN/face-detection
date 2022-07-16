@@ -10,11 +10,19 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
-from guitoaddmember import Ui_secwindow
+from guitoaddmember import Ui_secWindow
 
 
 class Ui_MainWindow(object):
-
+    def openwindow(self):
+        self.window=QtWidgets.QMainWindow()
+        self.ui=Ui_secWindow()
+        self.ui.setupUi(self.window)
+        self.window.show()
+    def addfunct(self): 
+        print("Add new member button clicked")   
+    def capturefunct(self):
+        print("Capture button clicked")
     
    
     def setupUi(self, Dialog):
