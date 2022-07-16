@@ -22,7 +22,7 @@ flag=0
 name="name"
 img_name="d"
 
-class Ui_MainWindow(object):
+class Ui_secWindow(object):    
     def capture(self):
             print("Clicking Image!!")
             cam=cv2.VideoCapture(0)
@@ -195,9 +195,9 @@ class Ui_MainWindow(object):
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
-    MainWindow = QtWidgets.QMainWindow()
-    ui = Ui_MainWindow()
-    ui.setupUi(MainWindow)
-    MainWindow.show()
+    secwindow = QtWidgets.QMainWindow()
+    ui = Ui_secwindow()
+    ui.setupUi(secwindow)
+    secwindow.show()
     sys.exit(app.exec_())
 
