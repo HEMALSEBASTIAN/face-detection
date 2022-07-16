@@ -11,7 +11,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 from guitoaddmember import Ui_secWindow
-
+from combined3 import web_cam
 
 class Ui_MainWindow(object):
     def openwindow(self):
@@ -23,6 +23,7 @@ class Ui_MainWindow(object):
         print("Add new member button clicked")   
     def capturefunct(self):
         print("Capture button clicked")
+        web_cam()
     
    
     def setupUi(self, Dialog):

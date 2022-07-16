@@ -67,7 +67,7 @@ def web_cam():
                 access[0]=''
 
             cv2.putText(frame,name[0],(x,y-10),cv2.FONT_HERSHEY_SIMPLEX, 0.8,(0, 255, 0), 1)
-            cv2.putText(frame,access[0],(220,440),cv2.FONT_HERSHEY_SIMPLEX, 0.8,(0, 255, 0), 1) 
+            cv2.putText(frame,access[0],(220,440),cv2.FONT_HERSHEY_SIMPLEX, 1,(0, 255, 0), 4) 
             #to call verify function
             #call verify function only when the previous thread has finish execution
             if flag==0 and no_face==1 and down>100:    
