@@ -12,6 +12,12 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 
 class Ui_Dialog(object):
+
+    
+    def addfunct(self): 
+        print("Add new member button clicked")   
+    def capturefunct(self):
+        print("Capture button clicked")
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
         Dialog.resize(600, 400)
@@ -222,6 +228,8 @@ class Ui_Dialog(object):
 "border-color: rgb(0, 0, 0);\n"
 "border-color: rgb(137, 52, 255);")
         self.addnewbutton.setObjectName("addnewbutton")
+        self.addnewbutton.clicked.connect(self.addfunct)
+
         self.captbutton = QtWidgets.QPushButton(Dialog)
         self.captbutton.setGeometry(QtCore.QRect(370, 300, 171, 41))
         palette = QtGui.QPalette()
@@ -273,16 +281,18 @@ class Ui_Dialog(object):
 "border-color: rgb(0, 0, 0);\n"
 "border-color: rgb(137, 52, 255);")
         self.captbutton.setObjectName("captbutton")
+        self.captbutton.clicked.connect(self.capturefunct)
+
         self.labelnewmem = QtWidgets.QLabel(Dialog)
         self.labelnewmem.setGeometry(QtCore.QRect(80, 130, 131, 121))
         self.labelnewmem.setText("")
-        self.labelnewmem.setPixmap(QtGui.QPixmap("../Documents/GitHub/face-detection/iconsforgui/addnew.png"))
+        self.labelnewmem.setPixmap(QtGui.QPixmap("iconsforgui\\addnew.png"))
         self.labelnewmem.setScaledContents(True)
         self.labelnewmem.setObjectName("labelnewmem")
         self.labelcam = QtWidgets.QLabel(Dialog)
         self.labelcam.setGeometry(QtCore.QRect(380, 130, 141, 121))
         self.labelcam.setText("")
-        self.labelcam.setPixmap(QtGui.QPixmap("../Documents/GitHub/face-detection/iconsforgui/cameraicon.webp"))
+        self.labelcam.setPixmap(QtGui.QPixmap("iconsforgui\\cameraicon.webp"))
         self.labelcam.setScaledContents(True)
         self.labelcam.setObjectName("labelcam")
 
