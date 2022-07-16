@@ -44,7 +44,7 @@ class Ui_MainWindow(object):
 
                 if k%256 == 32:
                   self.tname=self.namebutton.text()
-                  img_name = "owners//"+self.tname + '.png'
+                  img_name = "owners//"+self.tname + '.jpg'
                   #'C:/Users/HP/Desktop/'+
                   print(img_name)
                   cv2.imwrite(img_name,frame)
@@ -200,3 +200,4 @@ if __name__ == "__main__":
     ui.setupUi(MainWindow)
     MainWindow.show()
     sys.exit(app.exec_())
+

@@ -408,4 +408,4 @@ def fun(parent):
     
 
 
-web_cam()
+#web_cam()
