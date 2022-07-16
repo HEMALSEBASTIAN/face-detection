@@ -24,8 +24,9 @@ frame=0
 frame1=NULL
 LINK=""
 name=['']
+access=['']
 def web_cam():
-    global flag,count,frame,name
+    global flag,count,frame,name,access
     cascPath = "haarcascade_frontalface_default.xml"
     faceCascade = cv2.CascadeClassifier(cascPath)
 
@@ -61,8 +62,10 @@ def web_cam():
 
             if no_face==0:
                 name[0]=''
+                access[0]=''
 
             cv2.putText(frame,name[0],(x,y-10),cv2.FONT_HERSHEY_SIMPLEX, 0.8,(0, 255, 0), 1)
+            cv2.putText(frame,access[0],(220,440),cv2.FONT_HERSHEY_SIMPLEX, 0.8,(0, 255, 0), 1) 
             #to call verify function
             #call verify function only when the previous thread has finish execution
             if flag==0 and no_face==1 and down>100:    
@@ -110,11 +113,17 @@ def verify():
 
             if verification.get('verified')==True:
                 name=file.split('.')
-                nn=name[0]
-                name[0]=nn[1:]
+                if(name[0].startswith("1")):
+                    access[0]='Hello '+name[0][1:]
+                    filename = 'owners/'+'1'+file[1:]
+                    name[0]=name[0][1:]
+                else:
+                    access[0]='Hello '+name[0]
+                    filename = 'owners/'+'1'+file
+                
                 print("%%%%%%%%%%%%%%%%% Access Granted %%%%%%%%%%%%%%%%")
                 current_owner=cv2.imread('owners/'+file)
-                filename = 'owners/'+'1'+file[1:]
+                
                 cv2.imwrite(filename, current_owner)
                 flag=0
                 count=0
@@ -136,6 +145,7 @@ def verify():
             enforce_detection=False)
             if verification.get('verified')==True:
                 name[0]='Stranger'
+                access[0]='Access Denied'
                 print("%%%%%%%%%%%%%%%%% Stranger again no email sent %%%%%%%%%%%%%%%%")
                 print(count)
                 flag=0
@@ -149,6 +159,7 @@ def verify():
     print('mail sending')
     filename1 = 'stranger/star.jpg'
     name[0]='Stranger'
+    access[0]='Access Denied'
     cv2.imwrite(filename1, frame)
     while(True):
         try:
@@ -359,6 +370,7 @@ def fun(parent):
     #video_capture.release()
 
     # create chrome instance
+    #opt = Options()
     opt=webdriver.ChromeOptions()
     opt.add_experimental_option('excludeSwitches', ['enable-logging'])
     opt.add_argument('--disable-blink-features=AutomationControlled')
