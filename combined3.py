@@ -25,7 +25,9 @@ frame1=NULL
 LINK=""
 name=['']
 access=['']
+video_capture=0
 def web_cam():
+    global video_capture
     global flag,count,frame,name,access
     cascPath = "haarcascade_frontalface_default.xml"
     faceCascade = cv2.CascadeClassifier(cascPath)
@@ -85,7 +87,9 @@ def web_cam():
             cv2.imshow('Video', frame)
             
         except:
-            print("NO CAMERA")
+            if flag==0:
+                video_capture = cv2.VideoCapture(0)
+                print("CAMERA TURNED ON")
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
     video_capture.release()
@@ -362,9 +366,9 @@ def video_call(driver,mail_address,password):
 
 def fun(parent):
 
-    global flag,count
-    
-
+    global flag,count,video_capture
+    video_capture.release()
+    print("CAMERA TURNED OFF")
     #video_capture.release()
 
     # create chrome instance
@@ -397,10 +401,11 @@ def fun(parent):
             isc=driver.find_element("xpath",'//*[@id="ow3"]/div[1]/div/div[10]/div[3]/div[10]/div[3]/div[3]/div/div/div[1]/span/button')
         except:
             is_closed=True
+            flag=0
+            count=0
+            parent.quit()   
     #video_capture = cv2.VideoCapture(0)
-    flag=0
-    count=0
-    parent.quit()
+    
 
 
 web_cam()
