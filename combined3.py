@@ -16,6 +16,7 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 import time
+from credentials import *
 
 flag=0
 count=0
@@ -356,13 +357,8 @@ def fun(parent):
     
 
     #video_capture.release()
-    # assign email id and password
-    mail_address = 'u1903092@rajagiri.edu.in'
-    password = 'iamaHEROMAN@27!'
-
 
     # create chrome instance
-    #opt = Options()
     opt=webdriver.ChromeOptions()
     opt.add_experimental_option('excludeSwitches', ['enable-logging'])
     opt.add_argument('--disable-blink-features=AutomationControlled')
@@ -382,7 +378,7 @@ def fun(parent):
 
     driver.get(
     'https://apps.google.com/meet/?hs=197')
-    video_call(driver,mail_address,password)
+    video_call(driver,user_name,password)
 
 
     is_closed=False
