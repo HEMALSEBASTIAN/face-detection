@@ -196,7 +196,7 @@ if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
     secwindow = QtWidgets.QMainWindow()
-    ui = Ui_secwindow()
+    ui = Ui_secWindow()
     ui.setupUi(secwindow)
     secwindow.show()
     sys.exit(app.exec_())

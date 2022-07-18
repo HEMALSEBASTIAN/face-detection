@@ -1,5 +1,5 @@
 import tkinter as tk   
-
+from tkinter import messagebox
 def write_text():
     print("The call can be connected!!")
 
@@ -38,5 +38,10 @@ exit_button = tk.Button(frame,
                    fg="black",
                    command=quit)
 exit_button.pack(side=tk.RIGHT,padx=35,pady=40)
+def on_closing():
+    flag=0
+    #if messagebox.askokcancel("Quit", "Do you want to quit?"):
+    parent.destroy()
 
+parent.protocol("WM_DELETE_WINDOW", on_closing)
 parent.mainloop()
