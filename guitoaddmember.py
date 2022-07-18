@@ -44,6 +44,8 @@ class Ui_secWindow(object):
 
                 if k%256 == 32:
                   self.tname=self.namebutton.text()
+                  if self.tname=='':
+                        self.tname='Unknown'
                   img_name = "owners//"+self.tname + '.jpg'
                   #'C:/Users/HP/Desktop/'+
                   print(img_name)
@@ -65,7 +67,7 @@ class Ui_secWindow(object):
         #cv2.destroyWindow("opencv_frame_0.png")
                 print("Saved")
                 cv2.destroyAllWindows()
-                quit()
+                #quit()
     #    name=self.namefield.text()
      #   name2=".png"
       #  name3= " ".join([name,name2])

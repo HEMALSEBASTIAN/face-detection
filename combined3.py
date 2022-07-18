@@ -198,7 +198,7 @@ def email_send():
         smtp.ehlo()
         smtp.starttls()
         smtp.ehlo()
-        smtp.login("mysmart99mail@gmail.com","cjtbiwpobyyqvcpi")
+        smtp.login("mysmart99mail@gmail.com",email_c)
         
     #image added
     #sfv
