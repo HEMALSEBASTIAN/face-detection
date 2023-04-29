@@ -40,6 +40,7 @@ exit_button = tk.Button(frame,
 exit_button.pack(side=tk.RIGHT,padx=35,pady=40)
 def on_closing():
     flag=0
+    print("dsjgiu")
     #if messagebox.askokcancel("Quit", "Do you want to quit?"):
     parent.destroy()
 

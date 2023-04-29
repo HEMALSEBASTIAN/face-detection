@@ -26,6 +26,7 @@ LINK=""
 name=['']
 access=['']
 video_capture=0
+
 def web_cam():
     global video_capture
     global flag,count,frame,name,access
@@ -184,7 +185,7 @@ def email_send():
     msg=EmailMessage()
     msg['Subject']='Home Security'
     msg['From']='mysmart99mail@gmail.com'
-    msg['To']='hemalsebastian123@gmail.com'
+    msg['To']='XXXXXXXXXXXXXXX@gmail.com'
     msg.set_content('An unknown face has been recognized at your doorlock!Image attached!!')
     
     with open('stranger\\star.jpg','rb') as f:
@@ -213,7 +214,7 @@ def sms_send():
     message = client.messages.create(  
                                 messaging_service_sid=msg_sid, 
                                 body='ALERT; Video call link :'+str(LINK),      
-                                to='+918281565993 ' 
+                                to='+91XXXXXXXXXX' 
                             ) 
     
     print("sms sent")
@@ -228,27 +229,13 @@ def gui():
     frame1 = tk.Frame(parent)
     frame1.pack()
     print('the prin2')
-    #T=tk.Text(frame,height=5,width=52)
-
-    #l =tk.Label(frame, text = "Fact of the Day")
-    #l.config(font =("Courier", 14))
-    #t='Do you want to call?'
-
-    """text_box= tk.Text(
-        frame,
-        height=5,
-        width=10)"""
     text_lab=tk.Label(parent, text='Do You want to call?').place(x=40,y=10)
 
-    #text_box.pack(side=tk.TOP)
-    #text_box.insert('end',t)
 
     text_disp= tk.Button(frame1, 
                     text="Yes", 
                     command=lambda: fun(parent))
 
-    #l.pack(side=tk.CENTER)
-    #T.pack()
     text_disp.pack(side=tk.LEFT,padx=25, pady=40)
 
     exit_button = tk.Button(frame1,
@@ -258,6 +245,11 @@ def gui():
     exit_button.pack(side=tk.RIGHT,padx=35,pady=40)
     print('the print4')
     parent.mainloop()
+
+def on_closing():
+    global flag
+    flag=0
+    print("ebfhrud")
 
 
 def QUIT(parent):
@@ -269,8 +261,6 @@ def QUIT(parent):
 def video_call(driver,mail_address,password):
     
     global LINK
-    #driver.implicitly_wait(15)
-    #click sign in button
     while(True):
         try:
             s=driver.find_element("xpath",'//*[@id="drawer"]/div/div[3]/div[1]/div/span[1]/a')
@@ -353,14 +343,6 @@ def video_call(driver,mail_address,password):
 
 
 
-    '''print("checking")
-    while(True):
-        try:
-            driver.find_element("xpath",'//*[@id="yDmH0d"]/div[3]/div[2]/div/div[2]/div/div[2]/button[2]/span').click()
-            print("admit")
-            break
-        except:
-            continue'''
 
 
 
@@ -369,10 +351,8 @@ def fun(parent):
     global flag,count,video_capture
     video_capture.release()
     print("CAMERA TURNED OFF")
-    #video_capture.release()
 
     # create chrome instance
-    #opt = Options()
     opt=webdriver.ChromeOptions()
     opt.add_experimental_option('excludeSwitches', ['enable-logging'])
     opt.add_argument('--disable-blink-features=AutomationControlled')
@@ -404,8 +384,5 @@ def fun(parent):
             flag=0
             count=0
             parent.quit()   
-    #video_capture = cv2.VideoCapture(0)
-    
 
 
-#web_cam()
